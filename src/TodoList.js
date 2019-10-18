@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import TodoItem from "./TodoItem";
 
-import './style.css';
-
-
+import { Button } from 'antd';
 
 class TodoList extends React.Component {
 
@@ -62,7 +60,7 @@ class TodoList extends React.Component {
       <Fragment>
         <div>
           <input value={this.state.inputValue} onChange={this.handleInputOnChange} />
-          <button className="red-btn" onClick={this.handleBtnClick} > add</button>
+          <Button type="primary" onClick={this.handleBtnClick} >add</Button>
         </div>
         <ul>{this.getTodoItems()}</ul>
       </Fragment >
