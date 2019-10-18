@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import TodoItem from "./TodoItem";
+
+import './style.css';
+
+
 
 class TodoList extends React.Component {
 
@@ -55,13 +59,13 @@ class TodoList extends React.Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <div>
           <input value={this.state.inputValue} onChange={this.handleInputOnChange} />
-          <button onClick={this.handleBtnClick} > add</button>
+          <button className="red-btn" onClick={this.handleBtnClick} > add</button>
         </div>
-        <ul className="table">{this.getTodoItems()}</ul>
-      </div >
+        <ul>{this.getTodoItems()}</ul>
+      </Fragment >
 
     )
 
