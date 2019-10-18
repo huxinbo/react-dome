@@ -1,4 +1,5 @@
 import React from 'react';
+import TodoItem from "./TodoItem";
 
 class TodoList extends React.Component {
 
@@ -8,6 +9,10 @@ class TodoList extends React.Component {
       list: [],
       inputValue: ""
     }
+
+    this.handleInputOnChange = this.handleInputOnChange.bind(this);
+    this.handleBtnClick = this.handleBtnClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleBtnClick() {
@@ -23,7 +28,10 @@ class TodoList extends React.Component {
     })
   }
 
-  handleItemClick(index) {
+  // 父组件通过属性的形式向子组件传递参数
+  // 父组件通过props接受父组件传递过来的参数
+
+  handleDelete(index) {
     const list = [...this.state.list];
     list.splice(index, 1);
     this.setState({
@@ -31,20 +39,28 @@ class TodoList extends React.Component {
     })
   }
 
+  getTodoItems() {
+    return (
+      this.state.list.map((item, index) => {
+        return (
+          <TodoItem
+            delete={this.handleDelete}
+            content={item}
+            index={index}
+          />
+        )
+      })
+    )
+  }
+
   render() {
     return (
       <div>
         <div>
-          <input value={this.state.inputValue} onChange={this.handleInputOnChange.bind(this)} />
-          <button onClick={this.handleBtnClick.bind(this)} > add</button>
+          <input value={this.state.inputValue} onChange={this.handleInputOnChange} />
+          <button onClick={this.handleBtnClick} > add</button>
         </div>
-        <ul className="table">
-          {
-            this.state.list.map((item, index) => {
-              return <li>{item} <button value={index} onClick={this.handleItemClick.bind(this)}>删除</button></li>
-            })
-          }
-        </ul>
+        <ul className="table">{this.getTodoItems()}</ul>
       </div >
 
     )
